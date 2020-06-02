@@ -1,0 +1,134 @@
+body{
+    font-family: "Tw Cen MT Condensed Extra Bold";
+    background: #ccc;
+}
+.content{
+    /*margin-top: 35px;
+    margin: 10px 0px;*/
+}
+
+.folder-list{
+    height: 100vh;
+    padding: 10px 0px;
+    border:1px solid #333;
+    background: #fff;
+}
+
+.folder-list .row{
+    margin-top: 10px;
+}
+
+.file{
+    margin-left: 5%;
+    margin-right: 5%;
+    min-height: 150px;
+    border: 1px solid #dfdfdf;
+    margin-bottom: 10px;
+    position: relative;
+
+}
+
+.file-link{
+    color: #2c4622;
+}
+
+
+.file:hover{
+    border:1px solid #dfdfdf;
+    transition: 0.3s;
+    background-color: #dfdfdf;
+}
+
+.file .image{
+    width: auto;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+
+}
+
+.file .image .file-icon{
+    width: auto;
+    max-height: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+}
+
+.file .file-name{
+    width: 100%;
+    font-size: 15px;
+    text-align: center;
+    height: auto;
+    word-break: break-word;
+}
+
+.back-button{
+    position: absolute;
+    top: 10px;
+    right: 35px;
+    float: right;
+    font-size: 25px;
+}
+
+.status-image{
+    width: auto;
+    height: 100px;
+    max-width: 90%;
+}
+
+.file-nav{
+    margin-top: 50px;
+    word-break: break-word;
+    border:1px solid #dfdfdf;
+}
+
+.close-button{
+    float: right;
+    font-size: 25px;
+}
+
+.file-nav span{
+    border-bottom: 1px solid #dfdfdf;
+    font-size: 14px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.file-nav  span b{
+    fon-size:18px;
+}
+
+#status {
+    background-color: #fff;
+    padding-top: 10px;
+    height: 100vh;
+    border-right: 1px solid #333;
+}
+
+.status_row{
+    width: 100%;
+    height: auto;
+    padding: 15px 10px;
+    font-size: 15px;
+    word-break: break-word;
+    text-align: right;
+}
+
+.status_row b{
+    font-size: 18px;
+    padding-bottom: 10px;
+    float: left;
+}
+
+.loading{
+    position: absolute;
+    top: 45vh;
+    left: 75vh;
+    z-index: 999;
+}
+
+#files{
+    display: none;
+}
