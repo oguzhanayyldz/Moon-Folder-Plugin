@@ -8,10 +8,12 @@ body{
 }
 
 .folder-list{
-    height: 100vh;
+    height: 94vh;
     padding: 10px 0px;
     border:1px solid #333;
     background: #fff;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .folder-list .row{
@@ -65,10 +67,22 @@ body{
 
 .back-button{
     position: absolute;
-    top: 10px;
+    top: 60px;
     right: 35px;
     float: right;
     font-size: 25px;
+    z-index: 999;
+    background-color: #333;
+    border-radius: 100%;
+    width: auto;
+    height: auto;
+    padding: 3px 10px;
+}
+
+.back-button i{
+
+    color: #fff;
+    text-align: center;
 }
 
 .status-image{
@@ -116,6 +130,10 @@ body{
     text-align: right;
 }
 
+.status_row button{
+    margin-right: 10px;
+}
+
 .status_row b{
     font-size: 18px;
     padding-bottom: 10px;
@@ -125,10 +143,71 @@ body{
 .loading{
     position: absolute;
     top: 45vh;
-    left: 75vh;
+    left: 100vh;
     z-index: 999;
 }
 
 #files{
     display: none;
 }
+
+.nav-item{
+    margin-left: 10px;
+}
+
+.different {
+    display: none;
+}
+
+.size-select{
+   display: none;
+}
+
+.file-select{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.file-select input{
+    width: 20px;
+    height: 20px;
+}
+
+.deletes{
+    display: none;
+}
+
+.deletes-button{
+    margin-left: 10px;
+}
+
+.back-folder{
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    background-color: #333;
+    opacity: 0.6;
+    line-height: 200px;
+    color: #fff;
+    font-size: 50px;
+    text-align: center;
+    opacity: 0;
+}
+
+#image{
+    display: block;
+    max-width: 100%;
+}
+
+.iframe {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden !important;
+    background: transparent;
+    border:none;
+    margin:0px !important;
+}
+
