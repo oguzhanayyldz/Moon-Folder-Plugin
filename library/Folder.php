@@ -4,14 +4,21 @@
 class Folder
 {
 
-    private $folder_path;
+    private $folder_path ='uploaded'; // Config this line by you can use how folder show
 
-    public function setSettings($main_path){
-         $this->folder_path = $main_path;
+    public function  __construct()
+    {
+
     }
 
-    public function loader($main_path){
-        echo '<iframe src="index.php?path='.$main_path.'" class="iframe"></iframe>';
+    public function loader(){
+        $loc = explode('/',$_SERVER['PHP_SELF'],-1);
+        $location = '';
+        foreach ($loc as $row){
+            $location .= $row;
+        }
+        $server= 'http://'.$_SERVER['SERVER_NAME'].'/'.$location.'/';
+        echo '<iframe src="'.$server.'index.php" class="iframe"></iframe>';
     }
 
     public function get_Path(){
@@ -194,7 +201,7 @@ class Folder
                                 <input type="hidden" name="type" value="file_rename">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Yeni Dosya İsmi:</label>
-                                    <input type="text" name="name" class="form-control" id="name">
+                                    <input type="text" name="name" class="form-control" id="file-name">
                                 </div>
                         </div>
                         <div class="modal-footer">
@@ -269,7 +276,7 @@ class Folder
                                 <input type="hidden" name="type" value="add_folder">
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Klasör Name:</label>
-                                    <input type="text" name="name" class="form-control" id="file" required>
+                                    <input type="text" name="name" class="form-control" id="folder" required>
                                 </div>
                         </div>
                         <div class="modal-footer">

@@ -152,7 +152,7 @@ $(document).ready(function () {
         if( e.button == 2 ) {
             var url = $(this).data('href');
             //console.log(url);
-            window.top.location='http://localhost/folderplugin'+url;
+            window.location.href='http://localhost/folderplugin'+url;
         }
     });
 
@@ -181,7 +181,7 @@ $(document).ready(function () {
             console.log(file);
             console.log(name);
             console.log(url);
-            window.top.location='http://localhost/folderplugin?move_to='+file+'&from='+url+'&name='+name;
+            window.location.href='http://localhost/folderplugin?move_to='+file+'&from='+url+'&name='+name;
         }
     });
 });

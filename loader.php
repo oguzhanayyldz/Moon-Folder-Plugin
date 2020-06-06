@@ -9,7 +9,7 @@ $folder = new Folder();
 </head>
 <body style="margin: 0px; overflow: hidden">
     <?php
-        $folder->loader('uploaded');
+        $folder->loader();
     ?>
 </body>
 </html>

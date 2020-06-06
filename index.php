@@ -2,9 +2,6 @@
 require ('library/Folder.php');
 require ('library/ImageResize.php');
 $folder = new Folder();
-if($_GET['path']){
-    $folder->setSettings($_GET['path']);
-}
 session_start();
 ini_set('memory_limit', '1024M');
 ?>
@@ -70,6 +67,9 @@ ini_set('memory_limit', '1024M');
 <?php $folder->getDeleteModel(); ?>
 <?php $folder->getOptimizeModel(); ?>
 <?php $folder->getResizeModal(); ?>
+<input type="hidden" id="server" value="<?php echo 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']; ?>">
+<?php $server= 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']; ?>
+<?php $path= $folder->get_Path(); ?>
 <div class="container-fluid">
     <div class="content">
         <div class="row">
@@ -157,7 +157,7 @@ ini_set('memory_limit', '1024M');
 <?php
 if(isset($_GET['delete'])){
     unlink($_GET['delete']);
-    echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin';</script>"; exit;
+    echo'<meta http-equiv="refresh" content="0;URL='.$server.'">';
 }
 if(isset($_GET['delete_folder'])){
     $files = scandir($_GET['delete_folder']);
@@ -166,7 +166,7 @@ if(isset($_GET['delete_folder'])){
             unlink($_GET['delete_folder'].'/'.$file);
     }
     rmdir($_GET['delete_folder']);
-    echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin';</script>"; exit;
+    echo'<meta http-equiv="refresh" content="0;URL='.$server.'">';
 }
 if(isset($_GET['move_to']) && isset($_GET['from']) && isset($_GET['name'])){
     $move_to = $_GET['move_to'];
@@ -186,10 +186,10 @@ if(isset($_GET['move_to']) && isset($_GET['from']) && isset($_GET['name'])){
     $location =  trim($location,'/');
     if(rename($move_to,$from.'/'.$name) ==  true){
         $_SESSION['succes'] = "Dosya taşıma işlemi başarılı bir şekilde gerçekleşti.";
-        echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin?url=".$location."&alt_url=".$sub_url."';</script>"; exit;
+        echo'<meta http-equiv="refresh" content="0;URL='.$server.'?url='.$location.'&alt_url='.$sub_url.'">';
     }else{
         $_SESSION['error'] = "Dosya taşıma işlemi sırasında bir sorun meydana geldi.";
-        echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin?url=".$location."&alt_url=".$sub_url."';</script>"; exit;
+        echo'<meta http-equiv="refresh" content="0;URL='.$server.'?url='.$location.'&alt_url='.$sub_url.'">';
     }
 }
 if(isset($_POST['type'])):
@@ -221,10 +221,10 @@ if(isset($_POST['type'])):
             $location =  trim($location,'/');
             if($sonuc){
                 $_SESSION['succes'] = "İsim değiştirme işlemi başarılı bir şekilde gerçekleşmiştir.";
-                echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin?url=".$location."&alt_url=".$sub_url."';</script>"; exit;
+                echo'<meta http-equiv="refresh" content="0;URL='.$server.'?url='.$location.'&alt_url='.$sub_url.'">';
             }else{
                 $_SESSION['error'] = "Dosya isim değiştirme işlemi sırasında hata meydana geldi";
-                echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin?url=".$location."&alt_url=".$sub_url."';</script>"; exit;
+                echo'<meta http-equiv="refresh" content="0;URL='.$server.'?url='.$location.'&alt_url='.$sub_url.'">';
             }
             break;
         case 'add_file':
@@ -292,10 +292,10 @@ if(isset($_POST['type'])):
                 }
 
                 $_SESSION['succes'] = "Yeni dosya ekleme işlemi başarılı bir şekilde gerçekleşmiştir. ";
-                echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin?url=".$folder_."&alt_url=".$location."';</script>"; exit;
+                echo'<meta http-equiv="refresh" content="0;URL='.$server.'?url='.$folder_.'&alt_url='.$location.'">';
             } else {
                 $_SESSION['error'] = $error;
-                echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin?url=".$folder_."&alt_url=".$location."';</script>"; exit;
+                echo'<meta http-equiv="refresh" content="0;URL='.$server.'?url='.$folder_.'&alt_url='.$location.'">';
             }
 
             break;
@@ -323,7 +323,7 @@ if(isset($_POST['type'])):
                 $image->save($file);
             }
             $_SESSION['succes'] = "Optimizasyon işlemi başarı ile gerçekleştirildi...";
-            echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin?url=".$location."&alt_url=".$sub_url."&file=".$file."&type=image';</script>"; exit;
+            echo'<meta http-equiv="refresh" content="0;URL='.$server.'?url='.$location.'&alt_url='.$sub_url.'&file='.$file.'&type=image">';
             break;
         case 'resize':
             $file = $_POST['url'];
@@ -374,10 +374,10 @@ if(isset($_POST['type'])):
             $check =  getimagesize($file);
             if($check[0] == $width  && $check[1] == $height){
                 $_SESSION['succes'] = "Boyutlandırma işlemi başarı ile gerçekleştirildi...";
-                echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin?url=".$location."&alt_url=".$sub_url."&file=".$file."&type=image';</script>"; exit;
+                echo'<meta http-equiv="refresh" content="0;URL='.$server.'?url='.$location.'&alt_url='.$sub_url.'&file='.$file.'&type=image">';
             }else{
                 $_SESSION['error'] = "Boyutlandırma işlemi sırasın da bir hata meydanda geldi...";
-                echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin?url=".$location."&alt_url=".$sub_url."&file=".$file."&type=image';</script>"; exit;
+                echo'<meta http-equiv="refresh" content="0;URL='.$server.'?url='.$location.'&alt_url='.$sub_url.'&file='.$file.'&type=image">';
             }
             break;
         case 'deletes':
@@ -389,7 +389,8 @@ if(isset($_POST['type'])):
                     unlink($row);
                 }
             }
-            echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin';</script>"; exit;
+            echo'<meta http-equiv="refresh" content="0;URL='.$server.'">';
+            echo "<script type='text/javascript'>window.top.location='".$server."';</script>"; exit;
             break;
         case 'file_rename':
             $file = $_POST['url'];
@@ -408,10 +409,10 @@ if(isset($_POST['type'])):
                 $location = trim($location,'/');
                 $sub_url = trim($sub_url,'/');
                 $_SESSION['succes'] = "İsim Değiştirme işlemi başarılı";
-                echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin?url=".$location."&alt_url=".$sub_url."&file=".$file."&type=folder';</script>"; exit;
+                echo'<meta http-equiv="refresh" content="0;URL='.$server.'?url='.$location.'&alt_url='.$sub_url.'&file='.$file.'&type=folder">';
             }else{
                 $_SESSION['error'] = "İsim Değiştirme işlemi sırasında bir sorun oluştu.";
-                echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin?url=".$location."&alt_url=".$sub_url."&file=".$file."&type=folder';</script>"; exit;
+                echo'<meta http-equiv="refresh" content="0;URL='.$server.'?url='.$location.'&alt_url='.$sub_url.'&file='.$file.'&type=folder">';
             }
             break;
         case 'add_folder':
@@ -432,12 +433,12 @@ if(isset($_POST['type'])):
                 $location = trim($location,'/');
                 $sub_url = trim($sub_url,'/');
                 $_SESSION['succes'] = "Klasör ekleme işlemi başarılı";
-                echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin?url=".$location."&alt_url=".$sub_url."&file=".$folder."&type=folder';</script>"; exit;
+                echo'<meta http-equiv="refresh" content="0;URL='.$server.'?url='.$location.'&alt_url='.$sub_url.'&file='.$folder.'&type=folder">';
             }else{
                 $location = trim($location,'/');
                 $sub_url = trim($sub_url,'/');
                 $_SESSION['error'] = "Klasör ekleme işlemi sırasında bir sorun oluştu.";
-                echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin?url=".$location."&alt_url=".$sub_url."&file=".$folder."&type=folder';</script>"; exit;
+                echo'<meta http-equiv="refresh" content="0;URL='.$server.'?url='.$location.'&alt_url='.$sub_url.'&file='.$folder.'&type=folder">';
             }
             break;
         case 'crop':
@@ -462,7 +463,7 @@ if(isset($_POST['type'])):
             $image->freecrop($data->width, $data->height, $x =  $data->x, $y = $data->y);
             $image->save($url);
             $_SESSION['succes'] = "Kırpma işlemi başarılı";
-            echo "<script type='text/javascript'>window.top.location='http://localhost/folderplugin?url=".$location."&alt_url=".$sub_url."&file=".$url."&type=image';</script>"; exit;
+            echo'<meta http-equiv="refresh" content="0;URL='.$server.'?url='.$location.'&alt_url='.$sub_url.'&file='.$url.'&type=image">';
             break;
     endswitch;
 endif;
