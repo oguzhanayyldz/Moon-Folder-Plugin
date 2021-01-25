@@ -41,4 +41,4 @@ Finally, write this style code.
 
 You can use the application so easily now.
 
-[My Web Page](http://oguzhanayyildiz.com/)
+[My Web Page](http://oguzhanayyildiz.com.tr/)
